@@ -74,7 +74,7 @@ Sistema fullstack para extração, visualização e gerenciamento de dados de fa
 3. **Instale as dependências do backend**:
 
    ```bash
-   npm install
+   npm install --force
    ```
 
 4. **Gerar os tipos do Prisma**:
