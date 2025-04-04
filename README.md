@@ -141,14 +141,14 @@ Sistema fullstack para extração, visualização e gerenciamento de dados de fa
 4. **Rodar o servidor do frontend**:
 
    ```bash
-   npm run start
+   npm run dev
    ```
 
-   O frontend estará rodando na porta **3000**.
+   O frontend estará rodando na porta **5173**.
 
 ## 🖥️ Acessando a Aplicação
 
-- **Frontend:** [http://localhost:3000](http://localhost:3000)
+- **Frontend:** [http://localhost:3000](http://localhost:5173)
 - **Backend (Swagger):** [http://localhost:3001/swagger](http://localhost:3001/swagger)
 - **Prisma Studio:** [http://localhost:5555](http://localhost:5555)
 
