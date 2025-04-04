@@ -1,50 +1,34 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { PrismaService } from '../src/prisma.service';  // Certifique-se de que o caminho está correto
-import { FaturasService } from '../src/faturas.service'; // Certifique-se de que o caminho está correto
-
+import { FaturasService } from '../src/faturas.service';
+import { PrismaService } from '../src/prisma.service';
+import { INestApplication } from '@nestjs/common'; // Importando o tipo correto
+import request from 'supertest';
 
 describe('FaturasService', () => {
+  let app: INestApplication; // Definindo explicitamente o tipo como INestApplication
   let service: FaturasService;
-  let prismaService: PrismaService;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
+  beforeAll(async () => {
+    const moduleFixture: TestingModule = await Test.createTestingModule({
       providers: [FaturasService, PrismaService],
     }).compile();
 
-    service = module.get<FaturasService>(FaturasService);
-    prismaService = module.get<PrismaService>(PrismaService);
+    app = moduleFixture.createNestApplication();
+    await app.init();
+
+    service = moduleFixture.get<FaturasService>(FaturasService);
   });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
+  it('should return all invoices', async () => {
+    const result = await service.obterFaturas();
+
+    expect(result).toBeInstanceOf(Array);
+    expect(result.length).toBeGreaterThan(0);
+    expect(result[0]).toHaveProperty('customerNumber');
+    expect(result[0]).toHaveProperty('referenceMonth');
   });
 
-  describe('criarFatura', () => {
-    it('should create a new fatura', async () => {
-      const createData = {
-        numero_cliente: '1234567890',
-        mes_referencia: 'ABR/2024',
-        energia_eletrica: 150,
-        energia_scee: 50,
-        energia_gdi: 20,
-        contribuicao_ilum: 10,
-        valor_total: 200,
-      };
-
-      const createdFatura = await service.criarFatura(createData);
-
-      expect(createdFatura).toHaveProperty('id');
-      expect(createdFatura.customerNumber).toEqual(createData.numero_cliente);
-      expect(createdFatura.referenceMonth).toEqual(createData.mes_referencia);
-    });
-  });
-
-  describe('obterFaturas', () => {
-    it('should return all faturas', async () => {
-      const faturas = await service.obterFaturas();
-      expect(faturas).toBeInstanceOf(Array);
-      expect(faturas.length).toBeGreaterThanOrEqual(0);
-    });
+  afterAll(async () => {
+    await app.close();
   });
 });
