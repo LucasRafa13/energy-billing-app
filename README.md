@@ -1,4 +1,3 @@
-
 # ⚡ Energy Billing App
 
 Sistema fullstack para extração, visualização e gerenciamento de dados de faturas de energia elétrica em PDF.
@@ -109,9 +108,15 @@ Sistema fullstack para extração, visualização e gerenciamento de dados de fa
    ```bash
    npx prisma studio
    ```
+
    O Prisma Studio estará rodando na porta **5555**.
    Você pode acessar o Prisma Studio para visualizar e gerenciar os dados do banco de dados.
-   
+
+9. **Fazer Testes**:
+
+   ```bash
+   npm run test
+   ```
 
 ### Rodar o Frontend
 

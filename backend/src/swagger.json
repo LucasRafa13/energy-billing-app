@@ -1,0 +1,39 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Faturas API",
+    "description": "API para gerenciamento e consulta das faturas de energia.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/faturas": {
+      "get": {
+        "summary": "Retorna as faturas processadas",
+        "description": "Recupera as faturas que foram processadas.",
+        "responses": {
+          "200": {
+            "description": "Faturas processadas com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "string" },
+                      "data": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

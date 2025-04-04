@@ -1,0 +1,26 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Invoice {
+  id                      Int      @id @default(autoincrement())
+  customerNumber           String
+  referenceMonth           String
+  energyKwh                Float
+  energyValue              Float
+  sceeeKwh                 Float
+  sceeeValue               Float
+  gdKwh                    Float
+  gdValue                  Float
+  publicLighting           Float
+  totalConsumptionKwh      Float
+  totalValueWithoutGd      Float
+  economyGd                Float
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @updatedAt
+}
